@@ -40,19 +40,11 @@ const AboutMe: React.FC = () => {
         />
         <div className="text-center sm:text-left">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">Vũ Phan Hoài Sang</h1>
-          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">Sinh viên năm cuối • Tìm cơ hội thực tập</p>
-          <p className="text-sm sm:text-base text-emerald-600 dark:text-emerald-400 font-medium">Fullstack Developer</p>
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400">Sinh viên năm cuối </p>
+          <p className="text-sm sm:text-base text-emerald-600 dark:text-emerald-400 font-medium">BackEnd Developer</p>
         </div>
       </div>
       <div className="mt-6 sm:mt-8 space-y-4 text-sm sm:text-base">
-        <p>
-          Sinh viên năm cuối với đam mê phát triển phần mềm, đặc biệt là công nghệ web và AI. 
-          Có kinh nghiệm làm việc nhóm với vai trò Team Leader trong các dự án thực tế về E-commerce và Hotel Booking.
-        </p>
-        <p>
-          Hiện đang thực hiện khóa luận tốt nghiệp về "Ứng Dụng AI Trong Quản Lý Và Phân Công Công Việc" 
-          với độ chính xác cao trên 100 nghìn mẫu dữ liệu commit từ GitHub, sử dụng Google Cloud để hỗ trợ xây dựng mô hình.
-        </p>
         <div>
           <h2 className="text-lg sm:text-xl font-semibold mb-2 text-gray-900 dark:text-white">Kỹ năng công nghệ</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -69,7 +61,6 @@ const AboutMe: React.FC = () => {
               <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                 <li>React & TypeScript</li>
                 <li>Tailwind CSS</li>
-                <li>Responsive Design</li>
               </ul>
             </div>
             <div>
@@ -84,7 +75,6 @@ const AboutMe: React.FC = () => {
               <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 text-sm">
                 <li>Google Cloud Platform</li>
                 <li>Git & GitHub</li>
-                <li>Team Leadership</li>
               </ul>
             </div>
           </div>

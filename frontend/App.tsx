@@ -1,5 +1,6 @@
 
 import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { WindowInstance } from './types';
 import { APPS } from './constants';
 import Desktop from './components/desktop/Desktop';
@@ -48,21 +49,21 @@ const App: React.FC = () => {
                 },
                 modes: {
                     repulse: {
-                        distance: 100,
-                        duration: 0.4,
+                        distance: 120,
+                        duration: 0.8,
                     },
                 },
             },
             particles: {
                 color: {
-                    value: "#00ff99",
+                    value: ["#10b981", "#38bdf8", "#a78bfa"], // emerald, sky, violet
                 },
                 links: {
-                    color: "#00ff99",
-                    distance: 150,
+                    color: ["#10b981", "#38bdf8", "#a78bfa"],
+                    distance: 140,
                     enable: true,
-                    opacity: 0.15,
-                    width: 1,
+                    opacity: 0.22,
+                    width: 1.2,
                 },
                 move: {
                     direction: "none" as const,
@@ -70,24 +71,31 @@ const App: React.FC = () => {
                     outModes: {
                         default: "bounce" as const,
                     },
-                    random: false,
-                    speed: 1,
+                    random: true,
+                    speed: 0.45,
                     straight: false,
                 },
                 number: {
                     density: {
                         enable: true,
                     },
-                    value: 120,
+                    value: 90,
                 },
                 opacity: {
-                    value: 0.2,
+                    value: { min: 0.25, max: 0.5 },
+                    animation: { enable: true, speed: 0.18, sync: false },
                 },
                 shape: {
                     type: "circle",
                 },
                 size: {
-                    value: { min: 1, max: 3 },
+                    value: { min: 2, max: 5 },
+                    animation: { enable: true, speed: 0.6, sync: false },
+                },
+                shadow: {
+                    enable: true,
+                    color: "#10b981",
+                    blur: 8,
                 },
             },
             detectRetina: true,
@@ -212,7 +220,6 @@ const App: React.FC = () => {
             )
         );
     };
-
     if (!init) {
         return null;
     }
@@ -222,7 +229,6 @@ const App: React.FC = () => {
         return (
             <div className="w-screen h-screen bg-[#0d1117] overflow-hidden dark">
                 <MobileLayout onOpenApp={openApp} />
-                
                 <AnimatePresence>
                     {windows.map(win => (
                         <MobileWindow
@@ -237,35 +243,58 @@ const App: React.FC = () => {
         );
     }
 
-    // Desktop Layout
     return (
-        <div className="w-screen h-screen bg-[#0d1117] overflow-hidden dark">
+        <div className="w-screen h-screen overflow-hidden dark relative">
+            {/* Animated background with framer-motion */}
+            <motion.div
+                className="absolute inset-0 z-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1, background: [
+                    "linear-gradient(120deg, #10b981 0%, #38bdf8 100%)",
+                    "linear-gradient(120deg, #38bdf8 0%, #a78bfa 100%)",
+                    "linear-gradient(120deg, #a78bfa 0%, #10b981 100%)"
+                ] }}
+                transition={{
+                    background: {
+                        repeat: Infinity,
+                        duration: 8,
+                        ease: "linear"
+                    },
+                    opacity: { duration: 1 }
+                }}
+                style={{ width: "100%", height: "100%" }}
+            />
+            {/* Particles overlay */}
             <Particles
                 id="tsparticles"
                 particlesLoaded={particlesLoaded}
                 options={options}
-                className="absolute inset-0 -z-10"
+                className="absolute inset-0 z-10"
             />
-            <Desktop onOpenApp={openApp} />
-            
-            <div className="w-full h-full pointer-events-none">
-                <AnimatePresence>
-                    {windows.map(win => (
-                        <Window
-                            key={win.id}
-                            instance={win}
-                            onClose={closeWindow}
-                            onFocus={focusWindow}
-                            onMinimize={minimizeWindow}
-                            onToggleMaximize={toggleMaximizeWindow}
-                            onPositionChange={handlePositionChange}
-                            isActive={activeWindowId === win.id}
-                        />
-                    ))}
-                </AnimatePresence>
+            {/* Desktop icons and logic always above background/particles */}
+            <div className="absolute inset-0 z-20">
+                <Desktop onOpenApp={openApp} />
+                <div className="w-full h-full pointer-events-none">
+                    <AnimatePresence>
+                        {windows.map(win => (
+                            <Window
+                                key={win.id}
+                                instance={win}
+                                onClose={closeWindow}
+                                onFocus={focusWindow}
+                                onMinimize={minimizeWindow}
+                                onToggleMaximize={toggleMaximizeWindow}
+                                onPositionChange={handlePositionChange}
+                                isActive={activeWindowId === win.id}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </div>
             </div>
-            
-            <Taskbar windows={windows} onTabClick={handleTaskbarClick} activeWindowId={activeWindowId} />
+            {/* Taskbar should be above everything */}
+            <div className="absolute left-0 right-0 bottom-0 z-30">
+                <Taskbar windows={windows} onTabClick={handleTaskbarClick} activeWindowId={activeWindowId} />
+            </div>
         </div>
     );
 };
