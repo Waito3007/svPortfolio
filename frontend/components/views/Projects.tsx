@@ -63,18 +63,6 @@ const Projects: React.FC = () => {
           </div>
         ))}
       </div>
-      <div className="mt-6 sm:mt-8 bg-gradient-to-r from-emerald-50 to-sky-50 dark:from-emerald-900/15 dark:to-sky-900/15 p-4 sm:p-6 rounded-lg border border-emerald-200/70 dark:border-emerald-700/40">
-        <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">🚀 Kinh nghiệm Team Leadership</h3>
-        <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300">
-          Với vai trò <strong>Team Leader</strong> trong 2 dự án lớn, tôi đã có kinh nghiệm:
-        </p>
-        <ul className="mt-2 text-sm sm:text-base text-gray-700 dark:text-gray-300 list-disc list-inside space-y-1">
-          <li>Quản lý và phân công công việc cho team</li>
-          <li>Thiết kế kiến trúc hệ thống backend</li>
-          <li>Code review và đảm bảo chất lượng code</li>
-          <li>Giao tiếp với stakeholders và báo cáo tiến độ</li>
-        </ul>
-      </div>
     </div>
   );
 };
