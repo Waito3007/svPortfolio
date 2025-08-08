@@ -59,18 +59,32 @@ const Window: React.FC<WindowProps> = ({ instance, onClose, onFocus, onMinimize,
     >
       <motion.header
         onDoubleClick={() => onToggleMaximize(id)}
-  className={`flex items-center justify-between pl-3 pr-2 h-9 text-sm font-semibold ${isMaximized ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'} border-b ${isActive ? 'bg-emerald-500/15 border-emerald-400/40' : 'bg-black/20 border-white/10'} text-gray-100`}
+        className={`flex items-center justify-between pl-4 pr-3 h-12 text-base font-bold ${isMaximized ? 'cursor-default' : 'cursor-grab active:cursor-grabbing'} border-b ${isActive ? 'bg-emerald-500/15 border-emerald-400/40' : 'bg-black/20 border-white/10'} text-gray-100`}
       >
-        <div className="flex items-center space-x-2 pointer-events-none">
-            {React.cloneElement(app.icon, { className: 'w-4 h-4' })}
+        <div className="flex items-center space-x-3 pointer-events-none">
+            {app.icon ? React.cloneElement(app.icon, { className: 'w-6 h-6' }) : (
+                <svg className="w-6 h-6 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01" />
+                </svg>
+            )}
             <span>{app.title}</span>
         </div>
-        <div className="flex items-center space-x-2">
-      <button onClick={() => onMinimize(id)} title="Minimize" className="w-4 h-4 rounded-full bg-yellow-400/90 hover:bg-yellow-400 border border-white/20 flex items-center justify-center"></button>
-      <button onClick={() => onToggleMaximize(id)} title={isMaximized ? "Restore" : "Maximize"} className="w-4 h-4 rounded-full bg-emerald-400/90 hover:bg-emerald-400 border border-white/20 flex items-center justify-center">
+        <div className="flex items-center space-x-3">
+          <button onClick={() => onMinimize(id)} title="Minimize" className="w-7 h-7 rounded-full bg-yellow-400/90 hover:bg-yellow-400 border border-white/20 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="12" width="10" height="2" rx="1" fill="#fff" />
+            </svg>
+          </button>
+          <button onClick={() => onToggleMaximize(id)} title={isMaximized ? "Restore" : "Maximize"} className="w-7 h-7 rounded-full bg-emerald-400/90 hover:bg-emerald-400 border border-white/20 flex items-center justify-center">
             {isMaximized ? <RestoreIcon /> : <MaximizeIcon />}
           </button>
-      <button onClick={() => onClose(id)} title="Close" className="w-4 h-4 rounded-full bg-rose-500/90 hover:bg-rose-500 border border-white/20"></button>
+          <button onClick={() => onClose(id)} title="Close" className="w-7 h-7 rounded-full bg-rose-500/90 hover:bg-rose-500 border border-white/20 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="4" y1="4" x2="12" y2="12" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+              <line x1="12" y1="4" x2="4" y2="12" stroke="#fff" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
         </div>
       </motion.header>
     <main className="flex-1 overflow-hidden bg-black/35">

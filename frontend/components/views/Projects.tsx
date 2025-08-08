@@ -34,15 +34,15 @@ const projects = [
 
 const Projects: React.FC = () => {
   return (
-    <div className="p-4 sm:p-6 h-full overflow-y-auto">
-      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-900 dark:text-white">Dự án của tôi</h1>
+    <div className="p-4 sm:p-6 h-full overflow-y-auto bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-violet-700 dark:text-violet-300">Dự án của tôi</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {projects.map((project, index) => (
-          <div key={index} className="bg-white dark:bg-gray-700/50 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 group border border-gray-200/60 dark:border-white/10">
+          <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300 group border border-gray-200/60 dark:border-white/10">
             <img src={project.image} alt={project.title} className="w-full h-32 sm:h-40 object-cover" />
             <div className="p-3 sm:p-4">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                <h2 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-gray-100 mb-1 sm:mb-0">{project.title}</h2>
+                <h2 className="text-base sm:text-lg font-semibold text-emerald-700 dark:text-emerald-300 mb-1 sm:mb-0">{project.title}</h2>
                 <span className={`text-xs px-2 py-1 rounded-full font-medium self-start sm:self-auto ${
                   project.status === 'Completed' ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200' :
                   project.status.includes('Progress') ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200' :
@@ -51,10 +51,10 @@ const Projects: React.FC = () => {
                   {project.status}
                 </span>
               </div>
-              <p className="mt-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{project.description}</p>
+              <p className="mt-2 text-xs sm:text-sm text-gray-900 dark:text-gray-100 leading-relaxed">{project.description}</p>
               <div className="mt-3 sm:mt-4 flex flex-wrap gap-1 sm:gap-2">
                 {project.tags.map(tag => (
-                  <span key={tag} className="px-2 py-1 bg-gray-100 text-gray-800 dark:bg-white/10 dark:text-gray-100 text-xs font-medium rounded-full border border-gray-200/70 dark:border-white/10">
+                  <span key={tag} className="px-2 py-1 bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-200 text-xs font-medium rounded-full border border-violet-200/70 dark:border-violet-400/30">
                     {tag}
                   </span>
                 ))}

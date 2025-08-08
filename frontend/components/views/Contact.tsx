@@ -29,42 +29,42 @@ const LocationIcon = () => (
 
 const Contact: React.FC = () => {
     return (
-        <div className="p-4 sm:p-8 h-full flex flex-col justify-center items-center text-gray-800 dark:text-gray-200">
-            <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-gray-900 dark:text-white text-center">Liên hệ với tôi</h1>
+        <div className="p-4 sm:p-8 h-full flex flex-col justify-center items-center bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-emerald-700 dark:text-emerald-300 text-center">Liên hệ với tôi</h1>
             <div className="space-y-4 sm:space-y-6 w-full max-w-md">
-                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <MailIcon />
                     <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Email</p>
-                        <a href="mailto:vphanhoaisang@gmail.com" className="text-sm sm:text-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 break-all">
+                        <p className="text-xs sm:text-sm text-violet-700 dark:text-violet-300 font-semibold">Email</p>
+                        <a href="mailto:vphanhoaisang@gmail.com" className="text-sm sm:text-lg text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 break-all">
                             vphanhoaisang@gmail.com
                         </a>
                     </div>
                 </div>
                 
-                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <GithubIcon />
                     <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">GitHub</p>
-                        <a href="https://github.com/Waito3007" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-lg text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 break-all">
+                        <p className="text-xs sm:text-sm text-violet-700 dark:text-violet-300 font-semibold">GitHub</p>
+                        <a href="https://github.com/Waito3007" target="_blank" rel="noopener noreferrer" className="text-sm sm:text-lg text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 break-all">
                             github.com/Waito3007
                         </a>
                     </div>
                 </div>
 
-                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                     <LinkedinIcon />
                     <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">LinkedIn</p>
-                        <span className="text-sm sm:text-lg text-gray-700 dark:text-gray-300">Sẵn sàng kết nối</span>
+                        <p className="text-xs sm:text-sm text-violet-700 dark:text-violet-300 font-semibold">LinkedIn</p>
+                        <span className="text-sm sm:text-lg text-gray-900 dark:text-gray-100">Sẵn sàng kết nối</span>
                     </div>
                 </div>
                 
-                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-700/50 rounded-lg shadow-sm">
+                <div className="flex items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
                     <LocationIcon />
                     <div className="min-w-0 flex-1">
-                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Địa điểm</p>
-                        <span className="text-sm sm:text-lg text-gray-700 dark:text-gray-300">Việt Nam</span>
+                        <p className="text-xs sm:text-sm text-violet-700 dark:text-violet-300 font-semibold">Địa điểm</p>
+                        <span className="text-sm sm:text-lg text-gray-900 dark:text-gray-100">Việt Nam</span>
                     </div>
                 </div>
             </div>
