@@ -1,8 +1,8 @@
 
 import React from 'react';
-import AboutMe from './components/content/AboutMe';
-import Projects from './components/content/Projects';
-import Contact from './components/content/Contact';
+import AboutMe from './components/views/AboutMe';
+import Projects from './components/views/Projects';
+import Contact from './components/views/Contact';
 import { AppType } from './types';
 
 const FolderIcon: React.FC<{ className?: string }> = ({ className }) => (
@@ -28,21 +28,21 @@ const MailIcon: React.FC<{ className?: string }> = ({ className }) => (
 export const APPS: AppType[] = [
     {
         id: 'about',
-        title: 'About Me',
+        title: 'Về tôi',
         icon: <UserIcon className="w-16 h-16 text-sky-400" />,
         component: AboutMe,
         defaultSize: { width: 600, height: 450 },
     },
     {
         id: 'projects',
-        title: 'My Projects',
+        title: 'Dự án',
         icon: <FolderIcon className="w-16 h-16 text-amber-400" />,
         component: Projects,
         defaultSize: { width: 800, height: 600 },
     },
     {
         id: 'contact',
-        title: 'Contact Me',
+        title: 'Liên hệ',
         icon: <MailIcon className="w-16 h-16 text-teal-400" />,
         component: Contact,
         defaultSize: { width: 500, height: 400 },

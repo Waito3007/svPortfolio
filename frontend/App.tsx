@@ -1,15 +1,99 @@
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { WindowInstance } from './types';
 import { APPS } from './constants';
-import Desktop from './components/Desktop';
-import Window from './components/Window';
-import Taskbar from './components/Taskbar';
+import Desktop from './components/desktop/Desktop';
+import Window from './components/window/Window';
+import Taskbar from './components/taskbar/Taskbar';
+import MobileLayout from './components/mobile/MobileLayout';
+import MobileWindow from './components/mobile/MobileWindow';
+import { useIsMobile } from './hooks/useIsMobile';
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { loadSlim } from "@tsparticles/slim";
+import { AnimatePresence } from 'framer-motion';
 
 const App: React.FC = () => {
     const [windows, setWindows] = useState<WindowInstance[]>([]);
     const [nextZIndex, setNextZIndex] = useState(10);
     const [activeWindowId, setActiveWindowId] = useState<string | null>(null);
+    const [init, setInit] = useState(false);
+    const isMobile = useIsMobile();
+
+    useEffect(() => {
+        initParticlesEngine(async (engine) => {
+            await loadSlim(engine);
+        }).then(() => {
+            setInit(true);
+        });
+    }, []);
+
+    const particlesLoaded = async (container: any) => {
+        console.log("Particles loaded", container);
+    };
+    
+    const options = useMemo(
+        () => ({
+            background: {
+                color: {
+                    value: "#0d1117",
+                },
+            },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "repulse",
+                    },
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4,
+                    },
+                },
+            },
+            particles: {
+                color: {
+                    value: "#00ff99",
+                },
+                links: {
+                    color: "#00ff99",
+                    distance: 150,
+                    enable: true,
+                    opacity: 0.15,
+                    width: 1,
+                },
+                move: {
+                    direction: "none" as const,
+                    enable: true,
+                    outModes: {
+                        default: "bounce" as const,
+                    },
+                    random: false,
+                    speed: 1,
+                    straight: false,
+                },
+                number: {
+                    density: {
+                        enable: true,
+                    },
+                    value: 120,
+                },
+                opacity: {
+                    value: 0.2,
+                },
+                shape: {
+                    type: "circle",
+                },
+                size: {
+                    value: { min: 1, max: 3 },
+                },
+            },
+            detectRetina: true,
+        }),
+        [],
+    );
 
     const openApp = useCallback((appId: string) => {
         const app = APPS.find(a => a.id === appId);
@@ -25,13 +109,18 @@ const App: React.FC = () => {
                 )
             );
         } else {
+            // Default open in maximized state; remember previous size/position for restore
+            const prevPos = { x: 100 + windows.length * 30, y: 100 + windows.length * 30 };
+            const prevSize = app.defaultSize;
             const newWindow: WindowInstance = {
                 id: app.id,
                 app: app,
-                position: { x: 100 + windows.length * 30, y: 100 + windows.length * 30 },
-                size: app.defaultSize,
+                position: { x: 0, y: 0 },
+                size: { width: window.innerWidth, height: window.innerHeight - 48 },
                 isMinimized: false,
+                isMaximized: true,
                 zIndex: newZ,
+                previousState: { position: prevPos, size: prevSize },
             };
             setWindows(currentWindows => [...currentWindows, newWindow]);
         }
@@ -79,6 +168,34 @@ const App: React.FC = () => {
         );
     };
 
+    const toggleMaximizeWindow = (id: string) => {
+        setWindows(currentWindows =>
+            currentWindows.map(win => {
+                if (win.id === id) {
+                    if (win.isMaximized) {
+                        // Restore
+                        return {
+                            ...win,
+                            isMaximized: false,
+                            position: win.previousState?.position || { x: 150, y: 150 },
+                            size: win.previousState?.size || { width: 800, height: 600 },
+                        };
+                    } else {
+                        // Maximize
+                        return {
+                            ...win,
+                            isMaximized: true,
+                            previousState: { position: win.position, size: win.size },
+                            position: { x: 0, y: 0 },
+                            size: { width: window.innerWidth, height: window.innerHeight - 48 }, // 48px for taskbar
+                        };
+                    }
+                }
+                return win;
+            })
+        );
+    };
+
     const handleTaskbarClick = (id: string) => {
        const targetWindow = windows.find(w => w.id === id);
        if (targetWindow?.id === activeWindowId && !targetWindow?.isMinimized) {
@@ -96,22 +213,56 @@ const App: React.FC = () => {
         );
     };
 
+    if (!init) {
+        return null;
+    }
+
+    // Mobile Layout
+    if (isMobile) {
+        return (
+            <div className="w-screen h-screen bg-[#0d1117] overflow-hidden dark">
+                <MobileLayout onOpenApp={openApp} />
+                
+                <AnimatePresence>
+                    {windows.map(win => (
+                        <MobileWindow
+                            key={win.id}
+                            instance={win}
+                            onClose={closeWindow}
+                            isActive={activeWindowId === win.id}
+                        />
+                    ))}
+                </AnimatePresence>
+            </div>
+        );
+    }
+
+    // Desktop Layout
     return (
-        <div className="w-screen h-screen bg-cover bg-center overflow-hidden dark" style={{ backgroundImage: "url('https://picsum.photos/seed/wallpaper2/1920/1080')" }}>
+        <div className="w-screen h-screen bg-[#0d1117] overflow-hidden dark">
+            <Particles
+                id="tsparticles"
+                particlesLoaded={particlesLoaded}
+                options={options}
+                className="absolute inset-0 -z-10"
+            />
             <Desktop onOpenApp={openApp} />
             
             <div className="w-full h-full pointer-events-none">
-                {windows.map(win => (
-                    <Window
-                        key={win.id}
-                        instance={win}
-                        onClose={closeWindow}
-                        onFocus={focusWindow}
-                        onMinimize={minimizeWindow}
-                        onPositionChange={handlePositionChange}
-                        isActive={activeWindowId === win.id}
-                    />
-                ))}
+                <AnimatePresence>
+                    {windows.map(win => (
+                        <Window
+                            key={win.id}
+                            instance={win}
+                            onClose={closeWindow}
+                            onFocus={focusWindow}
+                            onMinimize={minimizeWindow}
+                            onToggleMaximize={toggleMaximizeWindow}
+                            onPositionChange={handlePositionChange}
+                            isActive={activeWindowId === win.id}
+                        />
+                    ))}
+                </AnimatePresence>
             </div>
             
             <Taskbar windows={windows} onTabClick={handleTaskbarClick} activeWindowId={activeWindowId} />

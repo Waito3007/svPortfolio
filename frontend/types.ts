@@ -14,5 +14,7 @@ export interface WindowInstance {
   position: { x: number; y: number };
   size: { width: number; height: number };
   isMinimized: boolean;
+  isMaximized: boolean;
   zIndex: number;
+  previousState?: { position: { x: number; y: number }; size: { width: number; height: number } };
 }

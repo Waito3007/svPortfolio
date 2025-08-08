@@ -1,16 +1,21 @@
 {
-  "name": "desktop-portfolio-os",
+  "name": "vu-phan-hoai-sang-portfolio",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Portfolio cá nhân của Vũ Phan Hoài Sang - Sinh viên năm cuối",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tsparticles/react": "^3.0.0",
+    "framer-motion": "^12.23.12",
+    "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react": "^19.1.0"
+    "react-tsparticles": "^2.12.2",
+    "tsparticles": "^3.9.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
