@@ -1,5 +1,18 @@
 
 import React, { useState, useRef, useEffect } from 'react';
+import {
+  SiDotnet,
+  SiNodedotjs,
+  SiExpress,
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiMongodb,
+  SiGooglecloud,
+  SiGit
+} from 'react-icons/si';
+import { RiDatabase2Fill } from 'react-icons/ri';
+import { MdApi } from 'react-icons/md';
 
 const contextMenuItems: { label: string; action: () => void }[] = [
   { label: 'Giới thiệu', action: () => { window.location.hash = '#about'; } },
@@ -28,69 +41,115 @@ const AboutMe: React.FC = () => {
 
   return (
     <div
-      className="p-4 sm:p-6 h-full overflow-y-auto bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+      className="p-4 sm:p-6 h-full overflow-y-auto bg-gray-900 text-white"
       onContextMenu={handleContextMenu}
       style={{ position: 'relative' }}
     >
-      <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <img
-          src="https://avatars.githubusercontent.com/u/80162938?s=120&v=4"
-          alt="Profile"
-          className="w-24 h-24 sm:w-30 sm:h-30 rounded-full object-cover border-4 border-emerald-500 dark:border-emerald-700 shadow-lg"
-        />
-        <div className="text-center sm:text-left">
-          <h1 className="text-2xl sm:text-3xl font-bold text-emerald-700 dark:text-emerald-300">Vũ Phan Hoài Sang</h1>
-          <p className="text-base sm:text-lg text-gray-900 dark:text-gray-100">Sinh viên năm cuối </p>
-          <p className="text-sm sm:text-base text-sky-700 dark:text-sky-300 font-semibold">BackEnd Developer</p>
-        </div>
-      </div>
-      <div className="mt-6 sm:mt-8 space-y-4 text-sm sm:text-base">
-        <div>
-          <h2 className="text-lg sm:text-xl font-semibold mb-2 text-violet-700 dark:text-violet-300">Kỹ năng công nghệ</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div>
-              <h3 className="font-medium text-emerald-700 dark:text-emerald-300 mb-1">Backend</h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-900 dark:text-gray-100 text-sm">
-                <li>.NET Core API</li>
-                <li>Node.js & Express</li>
-                <li>RESTful API Design</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-sky-700 dark:text-sky-300 mb-1">Frontend</h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-900 dark:text-gray-100 text-sm">
-                <li>React & TypeScript</li>
-                <li>Tailwind CSS</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-violet-700 dark:text-violet-300 mb-1">Database</h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-900 dark:text-gray-100 text-sm">
-                <li>SQL Server</li>
-                <li>MongoDB</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-amber-700 dark:text-amber-300 mb-1">Tools & Cloud</h3>
-              <ul className="list-disc list-inside space-y-1 text-gray-900 dark:text-gray-100 text-sm">
-                <li>Google Cloud Platform</li>
-                <li>Git & GitHub</li>
-              </ul>
+      {/* Profile card */}
+      <section className="bg-gray-800 border border-gray-700 rounded-xl p-5 sm:p-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5">
+          <img
+            src="https://avatars.githubusercontent.com/u/80162938?s=240&v=4"
+            alt="Profile"
+            className="w-32 h-32 sm:w-40 sm:h-40 rounded-full object-cover ring-4 ring-gray-700"
+          />
+          <div className="text-center sm:text-left">
+            <h1 className="text-2xl sm:text-3xl font-bold">Vũ Phan Hoài Sang</h1>
+            <p className="mt-1 text-sm sm:text-base text-gray-300">Sinh viên năm cuối • Backend Developer</p>
+            <div className="mt-4 flex flex-wrap gap-2 justify-center sm:justify-start">
+              <span className="px-3 py-1 text-xs rounded-full bg-gray-700 border border-gray-600">Backend</span>
+              <span className="px-3 py-1 text-xs rounded-full bg-gray-700 border border-gray-600">API Design</span>
+              <span className="px-3 py-1 text-xs rounded-full bg-gray-700 border border-gray-600">Database</span>
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* Skills grid */}
+      <section className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Backend */}
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+          <h2 className="text-lg font-semibold mb-3 text-gray-100">Backend</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiDotnet color="#512BD4" size={20} />
+              <span className="text-sm text-gray-200">.NET Core</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiNodedotjs color="#5FA04E" size={20} />
+              <span className="text-sm text-gray-200">Node.js</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiExpress color="#9CA3AF" size={20} />
+              <span className="text-sm text-gray-200">Express</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <MdApi color="#9CA3AF" size={20} />
+              <span className="text-sm text-gray-200">RESTful API</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Frontend */}
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+          <h2 className="text-lg font-semibold mb-3 text-gray-100">Frontend</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiReact color="#61DAFB" size={20} />
+              <span className="text-sm text-gray-200">React</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiTypescript color="#3178C6" size={20} />
+              <span className="text-sm text-gray-200">TypeScript</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiTailwindcss color="#38BDF8" size={20} />
+              <span className="text-sm text-gray-200">Tailwind</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Database */}
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+          <h2 className="text-lg font-semibold mb-3 text-gray-100">Database</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <RiDatabase2Fill color="#CC2927" size={20} />
+              <span className="text-sm text-gray-200">SQL Server</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiMongodb color="#47A248" size={20} />
+              <span className="text-sm text-gray-200">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Tools & Cloud */}
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-5">
+          <h2 className="text-lg font-semibold mb-3 text-gray-100">Tools & Cloud</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiGooglecloud color="#4285F4" size={20} />
+              <span className="text-sm text-gray-200">Google Cloud</span>
+            </div>
+            <div className="flex items-center gap-2 bg-gray-900/40 border border-gray-700 rounded-lg px-3 py-2">
+              <SiGit color="#F05032" size={20} />
+              <span className="text-sm text-gray-200">Git & GitHub</span>
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Context menu */}
       {menu && (
         <div
           ref={menuRef}
-          className="fixed z-50 bg-white dark:bg-gray-800 border border-emerald-300 dark:border-emerald-700 rounded shadow-lg"
+          className="fixed z-50 bg-gray-800 border border-gray-600 rounded shadow-lg"
           style={{ top: menu.y, left: menu.x, minWidth: 160 }}
         >
           {contextMenuItems.map((item, idx) => (
             <button
               key={idx}
-              className="block w-full text-left px-4 py-2 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-gray-900 dark:text-white"
+              className="block w-full text-left px-4 py-2 hover:bg-gray-700 text-white"
               onClick={() => {
                 item.action();
                 setMenu(null);

@@ -99,7 +99,7 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ onOpenApp }) => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-emerald-400 mb-1"
           >
-            Fullstack Developer
+            Backend Developer
           </motion.p>
           
           <motion.p
